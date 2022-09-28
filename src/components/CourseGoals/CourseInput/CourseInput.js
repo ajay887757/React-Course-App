@@ -15,7 +15,7 @@ const FormControl=styled.div`
   }
 }
 
-& input {
+#input {
   display: block;
   width: 100%;
   border: 1px solid ${props=>props.invalid? "red":"#ccc"
@@ -74,7 +74,7 @@ const CourseInput = props => {
       <FormControl invalid={!isValid}>
       {/* <FormControl className={`form-control ${!isValid? "invalid":""}`}> */}
         <label id="label">Course Goal</label>
-        <input type="text" onChange={goalInputChangeHandler} value ={enteredValue}/>
+        <input id="input" type="text" onChange={goalInputChangeHandler} value ={enteredValue}/>
         </FormControl>
      
       {/* <div className={`form-control ${!isValid? "invalid":""}`}>
