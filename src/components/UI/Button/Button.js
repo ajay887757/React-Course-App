@@ -2,7 +2,7 @@
 // import './Button.css';
 import styles from "./ButtonNew.module.css"
 // import styled from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
 
 // const Button=styled.button`
 //   width:100%;
@@ -34,12 +34,41 @@ import React from 'react';
 
 
 const Button = props => {
+
+  const [images,setImages]=useState("")
+  const IsUploadFile=(props)=>{
+    console.log("Images Info",props.target.files );
+    setImages(props.target.files)
+ 
+  }
+    const UploadFile=(props)=>{
+      let fileData=images
+      let formData = new FormData()
+
+      formData.append('files',fileData[0])
+      formData.append('files',fileData[1])
+
+      fetch("http://127.0.0.1:8080/uploads", {
+      method: "POST",
+      body: formData,
+    }).then(res => {
+      console.log(res)
+  })
+
+    
+  }
   return (
+    <div>
     <button type={props.type} className={styles.button} onClick={props.onClick}>
     {/* <button type={props.type} className="button" onClick={props.onClick}> */}
       {props.children}
     </button>
-  );
+
+    <input type="file" multiple onChange={IsUploadFile}></input>
+    <button className="btn btn-primary" type="submit" onClick={UploadFile}>Upload</button>
+
+  </div>
+    );
 };
 
 export default Button;
