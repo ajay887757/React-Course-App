@@ -3,6 +3,8 @@
 import styles from "./ButtonNew.module.css"
 // import styled from 'styled-components';
 import React, { useState } from 'react';
+import axios from "axios";
+
 
 // const Button=styled.button`
 //   width:100%;
@@ -48,14 +50,9 @@ const Button = props => {
       formData.append('files',fileData[0])
       formData.append('files',fileData[1])
 
-      fetch("http://127.0.0.1:8080/uploads", {
-      method: "POST",
-      body: formData,
-    }).then(res => {
-      console.log(res)
-  })
-
-    
+      axios.post("http://127.0.0.1:8080/uploads",formData).then((res) => {
+      console.log("res",res.data)
+  }) 
   }
   return (
     <div>
